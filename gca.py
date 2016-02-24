@@ -91,5 +91,6 @@ def __main__():
         print(run_cmd(['git', 'checkout', "" + bn]))
         print(run_cmd(['git', 'pull']))
 
+    print("gca Done")
 
 __main__()
