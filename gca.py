@@ -87,6 +87,7 @@ def __main__():
     for branch in remote_branches:
         bl = branch.split('/')
         bn = bl[-1]
+        print(run_cmd(['git', 'clean', '-d', '-f', '-q']))
         print(run_cmd(['git', 'branch', '--track', "" + bn, "" + branch]))
         print(run_cmd(['git', 'checkout', "" + bn]))
         print(run_cmd(['git', 'pull']))
