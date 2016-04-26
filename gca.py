@@ -91,7 +91,7 @@ def __main__():
         print(run_cmd(['git', 'branch', '--track', "" + bn, "" + branch]))
         print(run_cmd(['git', 'checkout', "" + bn]))
         print(run_cmd(['git', 'pull']))
-        print(run_cmd(['git', 'push', '-u', 'local', "" + bn]))
+        print(run_cmd(['git', 'push', 'local', "" + bn]))
 
     print("gca Done")
 
