@@ -86,11 +86,14 @@ def __main__():
     remote_branches = list_remote_branches()
     for branch in remote_branches:
         bl = branch.split('/')
+        if "local" in bl:
+            continue
         bn = bl[-1]
         print(run_cmd(['git', 'clean', '-d', '-f', '-q']))
         print(run_cmd(['git', 'branch', '--track', "" + bn, "" + branch]))
         print(run_cmd(['git', 'checkout', "" + bn]))
-        print(run_cmd(['git', 'pull']))
+        print(run_cmd(['git', 'branch', '--set-upstream-to=' + bl[1] + "/" + bn]))
+        print(run_cmd(['git', 'pull', bl[1], "" + bn]))
         print(run_cmd(['git', 'push', 'local', "" + bn]))
 
     print("gca Done")
