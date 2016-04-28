@@ -7,12 +7,26 @@ import sys
 import shutil
 
 def run_cmd(cmd):
-    print("run cmd: " + " ".join(cmd))
+    print("\trunning cmd: " + " ".join(cmd))
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
     if err:
-        print(err)
-    return out
+        print("\t\t" + err)
+
+    if len(out) == 0:
+        return ""
+
+    outline = out.split("\n")
+    ret = ""
+    idx = 0
+    while idx < len(outline):
+        line = outline[idx]
+        line = line.strip()
+        line = line.strip("\t")
+        ret += "\t\t" + line + "\n"
+        idx += 1
+
+    return ret
 
 def self_install(file, des):
     file_path = os.path.realpath(file)
@@ -85,6 +99,7 @@ def __main__():
 
     remote_branches = list_remote_branches()
     for branch in remote_branches:
+        print("working on remote: " + branch + " ...")
         bl = branch.split('/')
         if "local" in bl:
             continue
@@ -93,7 +108,7 @@ def __main__():
         print(run_cmd(['git', 'branch', '--track', "" + bn, "" + branch]))
         print(run_cmd(['git', 'checkout', "" + bn]))
         print(run_cmd(['git', 'branch', '--set-upstream-to=' + bl[1] + "/" + bn]))
-        print(run_cmd(['git', 'pull', bl[1], "" + bn]))
+        print(run_cmd(['git', 'pull']))
         print(run_cmd(['git', 'push', 'local', "" + bn]))
 
     print("gca Done")
