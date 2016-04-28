@@ -99,10 +99,12 @@ def __main__():
 
     remote_branches = list_remote_branches()
     for branch in remote_branches:
-        print("working on remote: " + branch + " ...")
         bl = branch.split('/')
-        if "local" in bl:
+        if len(bl) > 1 and "local" == bl[1]:
+            print("skip branch: " + branch + " ...")
             continue
+
+        print("working on remote: " + branch + " ...")
         bn = bl[-1]
         print(run_cmd(['git', 'clean', '-d', '-f', '-q']))
         print(run_cmd(['git', 'branch', '--track', "" + bn, "" + branch]))
