@@ -109,6 +109,7 @@ def __main__():
         print(run_cmd(['git', 'clean', '-d', '-f', '-q']))
         print(run_cmd(['git', 'branch', '--track', "" + bn, "" + branch]))
         print(run_cmd(['git', 'checkout', "" + bn]))
+        print(run_cmd(['git', 'clean', '-d', '-f', '-q']))
         print(run_cmd(['git', 'branch', '--set-upstream-to=' + bl[1] + "/" + bn]))
         print(run_cmd(['git', 'pull']))
         print(run_cmd(['git', 'push', 'local', "" + bn]))
