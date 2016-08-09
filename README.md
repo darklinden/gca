@@ -13,8 +13,8 @@ shell:
 git clone --mirror git@somewhere.com:repo.git
 cd repo.git
 git config remote.origin.fetch 'refs/heads/*:refs/heads/*'
-echo -n "*/1 * * * * "$(whoami)" cd "$(pwd)" && git fetch -q --tags">crontabjob.txt
-sudo crontab crontabjob.txt
+echo -n "*/1 * * * * cd "$(pwd)" && git fetch -q --tags">crontabjob.txt
+crontab crontabjob.txt
 
 ```
 
